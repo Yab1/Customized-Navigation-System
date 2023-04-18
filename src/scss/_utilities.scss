@@ -1,0 +1,239 @@
+@use "sass:math";
+
+$utilities: (
+  "display": (
+    "prefix": "d",
+    "value": (
+      "n": none,
+      "b": block,
+      "f": flex,
+      "i": inline,
+      "i-b": inline-block,
+    ),
+  ),
+  "position": (
+    "prefix": "pos",
+    "value": (
+      "a": absolute,
+      "r": relative,
+      "b": block,
+      "ib": inline-block,
+    ),
+  ),
+  "width": (
+    "prefix": "w",
+    "value": (
+      "10": 10%,
+      "20": 20%,
+      "30": 30%,
+      "40": 40%,
+      "50": 50%,
+      "60": 60%,
+      "70": 70%,
+      "80": 80%,
+      "90": 90%,
+      "100": 100%,
+    ),
+  ),
+  "height": (
+    "prefix": "h",
+    "value": (
+      "10": 10%,
+      "20": 20%,
+      "30": 30%,
+      "40": 40%,
+      "50": 50,
+      "60": 60%,
+      "70": 70%,
+      "80": 80%,
+      "90": 90%,
+      "100": 100%,
+    ),
+  ),
+  "padding": (
+    "prefix": "p",
+    "value": (
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "padding-left": (
+    "prefix": "pl",
+    "value": (
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "padding-right": (
+    "prefix": "pr",
+    "value": (
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "padding-top": (
+    "prefix": "pt",
+    "value": (
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "padding-bottom": (
+    "prefix": "pb",
+    "value": (
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "margin": (
+    "prefix": "m",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "margin-left": (
+    "prefix": "ml",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "margin-right": (
+    "prefix": "mr",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "margin-top": (
+    "prefix": "mt",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "margin-bottom": (
+    "prefix": "mb",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "gap": (
+    "prefix": "gap",
+    "value": (
+      "auto": auto,
+      "0": 0,
+      "1": $scaling-factor,
+      "2": $scaling-factor * 2,
+      "3": $scaling-factor * 4,
+      "4": $scaling-factor * 6,
+      "5": $scaling-factor * 8,
+      "6": $scaling-factor * 10,
+      "7": $scaling-factor * 12,
+    ),
+  ),
+  "opacity": (
+    "prefix": "o",
+    "value": (
+      "10": 0.1,
+      "20": 0.2,
+      "30": 0.3,
+      "40": 0.4,
+      "50": 0.5,
+      "60": 0.6,
+      "70": 0.7,
+      "80": 0.8,
+      "90": 0.9,
+      "100": 1,
+    ),
+  ),
+  "text-align": (
+    "prefix": "ta",
+    "value": (
+      "l": left,
+      "r": right,
+      "e": end,
+      "s": start,
+      "c": center,
+      "j": justify,
+    ),
+  ),
+);
+
+@each $property, $map in $utilities {
+  $prefix: map-get($map, "prefix");
+  $value: map-get($map, "value");
+
+  @each $key, $val in $value {
+    .#{$prefix}-#{$key} {
+      #{$property}: $val;
+    }
+  }
+}
