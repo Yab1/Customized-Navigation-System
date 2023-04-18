@@ -1,0 +1,27 @@
+$layout-values: flex-start, flex-end, center, space-between, space-around;
+
+.row {
+  flex-flow: row;
+}
+
+.col {
+  flex-flow: column wrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+@each $val in $layout-values {
+  //justify content classes
+  .js-#{$val} {
+    justify-content: $val;
+  }
+  //align items classes
+  .al-#{$val} {
+    align-items: $val;
+  }
+  //align self classes
+  .als-#{$val} {
+    align-self: $val;
+  }
+}
