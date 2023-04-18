@@ -44,5 +44,13 @@
   },
   "devDependencies": {
     "prettier": "^2.8.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.60.0"
   }
 }
