@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+$colors : black,red,yellow,pink,blue,purple,green;
+
+@each $val in $colors{
+  // @debug $val
+  .bor-#{$val}{
+    border-width: 0.1em;
+    border-style: solid;
+    border-color: $val;
+  }
+}
