@@ -18,7 +18,7 @@ const HeaderAppBar = () => {
   const [auth, setAuth] = useState(true);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} className="mb-3">
       <AppBar sx={{ bgcolor: "#fafafa", position: "static", color: "#212121" }}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
