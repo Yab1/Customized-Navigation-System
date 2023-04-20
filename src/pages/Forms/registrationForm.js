@@ -20,7 +20,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 
-function RegistrationForm() {
+function RegistrationForm({ handleLog }) {
   // states
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState("");
@@ -38,108 +38,107 @@ function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit");
+    // console.log("handleSubmit");
+    handleLog();
   };
   const handleClickShowPassword = (e) => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off">
-      <Box
-        component="form"
-        noValidate
-        onSubmit={(e) => handleSubmit(e)}
-        className={[classes.inputContainer, classes.center]}
-        sx={{ flexDirection: "column", gap: 2 }}
+    <Box
+      component="form"
+      noValidate
+      onSubmit={(e) => handleSubmit(e)}
+      className={[classes.inputContainer, classes.center]}
+      sx={{ flexDirection: "column", gap: 2 }}
+    >
+      <TextField
+        fullWidth
+        id="userName"
+        label="User Name"
+        variant="outlined"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+      />
+      <TextField
+        fullWidth
+        id="email"
+        label="Email"
+        variant="outlined"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <FormControl sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <OutlinedInput
+          id="password"
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
+        />
+      </FormControl>
+      <FormControl sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+        <OutlinedInput
+          id="confirmPassword"
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
+        />
+      </FormControl>
+
+      <Stack spacing={2} direction="row" className={classes.center}>
+        <FormControl>
+          <FormControlLabel
+            checked={checked}
+            control={<Checkbox />}
+            label="Remember Me"
+            onChange={() => setChecked(!checked)}
+          />
+        </FormControl>
+      </Stack>
+
+      <Button
+        variant="contained"
+        onClick={(e) => handleSubmit(e)}
+        size="medium"
+        sx={{ width: 300 }}
       >
-        <TextField
-          fullWidth
-          id="userName"
-          label="User Name"
-          variant="outlined"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          id="email"
-          label="Email"
-          variant="outlined"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <FormControl sx={{ width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <OutlinedInput
-            id="password"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl>
-        <FormControl sx={{ width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-          <OutlinedInput
-            id="confirmPassword"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
-          />
-        </FormControl>
-
-        <Stack spacing={2} direction="row" className={classes.center}>
-          <FormControl>
-            <FormControlLabel
-              checked={checked}
-              control={<Checkbox />}
-              label="Remember Me"
-              onChange={() => setChecked(!checked)}
-            />
-          </FormControl>
-        </Stack>
-
-        <Button
-          variant="contained"
-          onClick={(e) => handleSubmit(e)}
-          size="medium"
-          sx={{ width: 300 }}
-        >
-          Register
-        </Button>
-        <Button
-          variant="outlined"
-          size="medium"
-          sx={{ width: 300 }}
-          startIcon={<GoogleIcon />}
-        >
-          Sign up with Google
-        </Button>
-      </Box>
+        Register
+      </Button>
+      <Button
+        variant="outlined"
+        size="medium"
+        sx={{ width: 300 }}
+        startIcon={<GoogleIcon />}
+      >
+        Sign up with Google
+      </Button>
     </Box>
   );
 }

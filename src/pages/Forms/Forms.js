@@ -11,35 +11,51 @@ import { makeStyles } from "tss-react/mui";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-function Form() {
-  const [tab, setTab] = useState("2");
+function Form({ handleLog }) {
+  const [tab, setTab] = useState("1");
   const { classes } = useStyles();
 
   const switchTab = (e) => {
-    console.log(e);
+    setTab(tab === "1" ? "2" : "1");
   };
   return (
     <Container
       disableGutters
       maxWidth="xl"
       className={[classes.gradiant, classes.center]}
+      sx={{ zIndex: "tooltip" }}
     >
       <Card
         variant="outlined"
         typography="body1"
-        className={classes.center}
-        sx={{ py: 0, px: 0, p: 4, borderRadius: 3 }}
+        sx={{
+          py: 0,
+          px: 0,
+          p: 4,
+          borderRadius: 3,
+          height: 500,
+        }}
       >
         <Tabs
           value={tab}
-          sx={{ borderBottom: 1, borderColor: "divider", marginBottom: 3 }}
+          sx={{
+            borderBottom: 1,
+            borderColor: "divider",
+            marginBottom: 3,
+            width: "80%",
+          }}
+          className=" d-f js-center"
           onChange={switchTab}
         >
           <Tab label="Login" value="1" />
           <Tab label="Register" value="2" key="2" />
         </Tabs>
         <Box component="div">
-          {tab === "1" ? <LoginForm /> : <RegistrationForm />}
+          {tab === "1" ? (
+            <LoginForm handleLog={handleLog} />
+          ) : (
+            <RegistrationForm handleLog={handleLog} />
+          )}
         </Box>
       </Card>
     </Container>
@@ -64,7 +80,7 @@ const useStyles = makeStyles()({
     background: "-webkit-linear-gradient(to right, #240b36, #c31432)",
     background: "linear-gradient(to right, #240b36, #c31432)",
     backdropFilter: "blur(1.5px)",
-    zIndex: 10,
+    zIndex: 10000,
   },
   border: {
     border: "0.1em solid black",

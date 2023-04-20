@@ -1,5 +1,6 @@
 // Material UI components
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { makeStyles } from "tss-react/mui";
 import TextField from "@mui/material/TextField";
@@ -14,13 +15,14 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+import { Link as LinkMUI } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
+// import loginValidation from "../../functions/loginValidation";
 
-function LoginForm() {
+function LoginForm({ handleLog }) {
   // states
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -31,72 +33,74 @@ function LoginForm() {
   const { classes } = useStyles();
 
   // functions
-  // const handleChange = (e) => {
-  //   console.log("handleChange");
-  // };
+  const checker = (email, password) => {
+    console.log("handleChange");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit");
+    // console.log("handleSubmit");
+    handleLog();
   };
+
   const handleClickShowPassword = (e) => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <Box component="form" noValidate autoComplete="off">
-      <Box
-        component="form"
-        noValidate
-        onSubmit={(e) => handleSubmit(e)}
-        className={[classes.inputContainer, classes.center]}
-        sx={{ flexDirection: "column", gap: 2 }}
-      >
-        <TextField
-          fullWidth
-          id="email"
-          label="Email"
-          variant="outlined"
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+    <Box
+      component="form"
+      autoComplete="off"
+      noValidate
+      onSubmit={(e) => handleSubmit(e)}
+      className={[classes.inputContainer, classes.center]}
+      sx={{ flexDirection: "column", gap: 2 }}
+    >
+      <TextField
+        fullWidth
+        id="email"
+        label="Email"
+        variant="outlined"
+        margin="normal"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <FormControl sx={{ width: "100%" }} variant="outlined">
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <OutlinedInput
+          id="password"
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
         />
-        <FormControl sx={{ width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <OutlinedInput
-            id="password"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
+      </FormControl>
+
+      <Stack spacing={15} direction="row" className={classes.center}>
+        <FormControl>
+          <FormControlLabel
+            checked={checked}
+            control={<Checkbox />}
+            label="Remember Me"
+            onChange={() => setChecked(!checked)}
           />
         </FormControl>
-
-        <Stack spacing={2} direction="row" className={classes.center}>
-          <FormControl>
-            <FormControlLabel
-              checked={checked}
-              control={<Checkbox />}
-              label="Remember Me"
-              onChange={() => setChecked(!checked)}
-            />
-          </FormControl>
-          <Link href="#" underline="none">
-            Forgot Password
-          </Link>
-        </Stack>
-
+        <LinkMUI href="#" underline="none">
+          Forgot Password
+        </LinkMUI>
+      </Stack>
+      <Link to="/">
         <Button
           variant="contained"
           onClick={(e) => handleSubmit(e)}
@@ -105,15 +109,15 @@ function LoginForm() {
         >
           Login
         </Button>
-        <Button
-          variant="outlined"
-          size="medium"
-          sx={{ width: 300 }}
-          startIcon={<GoogleIcon />}
-        >
-          Sign in with Google
-        </Button>
-      </Box>
+      </Link>
+      <Button
+        variant="outlined"
+        size="medium"
+        sx={{ width: 300 }}
+        startIcon={<GoogleIcon />}
+      >
+        Sign in with Google
+      </Button>
     </Box>
   );
 }
