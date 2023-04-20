@@ -1,5 +1,5 @@
 // Material UI components
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -22,7 +22,7 @@ export default function Details({ product, handleClose }) {
   const { classes } = useStyles();
 
   return (
-    <Card sx={{ p: 5, borderRadius: 5 }}>
+    <Card sx={{ p: 5 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -115,13 +115,3 @@ const useStyles = makeStyles()({
     },
   },
 });
-
-// item: {
-//     category,
-//     description,
-//     id,
-//     image,
-//     price,
-//     title,
-//     rating: { count, rate },
-//   },
