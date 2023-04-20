@@ -1,8 +1,9 @@
 // React
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Custom Components
-import UserAccount from "./userAccount";
+import Account from "./account";
 import SearchAppBar from "./search";
 import ColorBadge from "./shoppingCart";
 
@@ -14,9 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
-const HeaderAppBar = () => {
-  const [auth, setAuth] = useState(true);
-
+const HeaderAppBar = ({ isLogging }) => {
   return (
     <Box sx={{ flexGrow: 1 }} className="mb-3">
       <AppBar sx={{ bgcolor: "#fafafa", position: "static", color: "#212121" }}>
@@ -24,14 +23,16 @@ const HeaderAppBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             E-Cart
           </Typography>
-          {auth ? (
-            <React.Fragment>
+          {isLogging ? (
+            <Stack direction="row" spacing={2}>
               <SearchAppBar />
               <ColorBadge />
-              <UserAccount />
-            </React.Fragment>
-          ) : (git
-            <Button color="inherit">Login</Button>
+              <Account />
+            </Stack>
+          ) : (
+            <Link to="/form">
+              <Button>Login</Button>
+            </Link>
           )}
         </Toolbar>
       </AppBar>
